@@ -2,21 +2,22 @@
 #include<linux/init.h>
 #include<linux/sched.h>
 #include<linux/syscalls.h>
-#include "processInfo.h"
-#include <stdio.h>
+#include "process_task_struct.h"
+//#include "stdio.h"
+//#include <../include/linux/errno.h>
 asmlinkage long sys_listProcessInfo(long p_id, char* file_name) 
 {   
 
      struct task_struct *proces;
 
-    char output[1000];
-   FILE *fptr;
+  //  char output[1000];
+  // FILE *fptr;
 
-   fptr = open(file_name,"w");
-   if(fptr == NULL){
-   printk("Error Reading file. Error no = o %d \n",errno); 
-   return 0;
-   }
+  // fptr = open(file_name,"w");
+  // if(fptr == NULL){
+  // printk("Error Reading file. Error no = o %d \n",errno); 
+  // return 0;
+   //}
    int flag=0;
     for_each_process(proces) {
  
@@ -41,6 +42,7 @@ asmlinkage long sys_listProcessInfo(long p_id, char* file_name)
        (long)proces->normal_prio \
     );
  
+/*
 fprintf(fptr,
       "Process: %s\n \
        PID_Number: %ld\n \
@@ -57,7 +59,7 @@ fprintf(fptr,
        (long)proces->static_prio, \
        (long)proces->normal_prio \
     );  
-  
+*/  
    if(proces->parent) 
       printk(
         "Parent process: %s, \
@@ -67,7 +69,7 @@ fprintf(fptr,
       );
   
    printk("\n\n");
-
+/*
 fprint(fptr,
         "Parent process: %s, \
          PID_Number: %ld \n\n", \ 
@@ -76,14 +78,16 @@ fprint(fptr,
       );
   
    
-   }
-  fclose(fptr);  
+*/  
+ }
+//  fclose(fptr);  
+
   }
 
 if(flag==0){
 printk("No process with PID %ld\n",p_id);
 }
   
+
   return 0;
 }
-

@@ -1,1 +1,1 @@
-asmlinkage long sys_ProcessTaskStruct(long p_id , Char* file_name);
+asmlinkage long sys_ProcessTaskStruct(long p_id , char* file_name);
